@@ -1,0 +1,13 @@
+# Odin2 Mini stock blob extraction list.
+#
+# Keep this file narrow at first. Add entries only after inventory confirms the
+# stock path and the consuming HAL/package in the target tree.
+
+# Stock Odin apps used for behavior study. Do not ship these once the
+# replacement stack covers the feature.
+system/app/OdinSettings/OdinSettings.apk
+system/app/TouchMapping/TouchMapping.apk
+system/app/GameAssistant/GameAssistant.apk
+
+# Device-specific firmware/HAL blobs will be added after a full partition dump
+# or adb pull inventory is reviewed.
