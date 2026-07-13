@@ -1,0 +1,79 @@
+service odin_early_kmsg /system/bin/odin_early_logger --metadata-kmsg
+    class core
+    user root
+    group root log
+    disabled
+    seclabel u:r:init:s0
+
+service odin_early_logcat /system/bin/logcat -b all -v threadtime -f /metadata/odin-early-logcat.log
+    class core
+    user root
+    group root log readproc
+    disabled
+    seclabel u:r:init:s0
+
+service odin_power_safety /system/bin/odin_power_safety
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:init:s0
+
+on early-init
+    exec -- /system/bin/odin_early_logger --metadata-marker hybrid-fstab-bind-start
+    exec -- /system/bin/mount -o bind /system/etc/fstab.odin2_hybrid.qcom /vendor/etc/fstab.qcom
+    exec -- /system/bin/odin_early_logger --metadata-marker hybrid-fstab-bind-returned
+    exec -- /system/bin/odin_early_logger --metadata-marker early-init
+    start odin_early_kmsg
+
+on init
+    exec -- /system/bin/odin_early_logger --metadata-marker init
+
+on late-init
+    exec -- /system/bin/odin_early_logger --metadata-marker late-init
+    start odin_power_safety
+    exec -- /system/bin/rm -f /metadata/odin-early-logcat.log
+    start odin_early_logcat
+
+on early-fs
+    exec -- /system/bin/odin_early_logger --metadata-marker early-fs
+
+on fs
+    exec -- /system/bin/odin_early_logger --metadata-marker fs
+
+on post-fs
+    exec -- /system/bin/odin_early_logger --metadata-marker post-fs
+
+on property:init.svc.adbd=running
+    exec -- /system/bin/odin_early_logger --metadata-marker standard-adbd-running
+
+on late-fs
+    exec -- /system/bin/odin_early_logger --metadata-marker late-fs
+
+on post-fs-data
+    exec -- /system/bin/odin_early_logger --metadata-marker post-fs-data
+    setprop persist.sys.usb.config adb
+    setprop sys.usb.config adb
+    start adbd
+
+on load-bpf-programs
+    exec -- /system/bin/odin_early_logger --metadata-marker load-bpf-programs
+
+on bpf-progs-loaded
+    exec -- /system/bin/odin_early_logger --metadata-marker bpf-progs-loaded
+
+on zygote-start
+    exec -- /system/bin/odin_early_logger --metadata-marker zygote-start
+
+on firmware_mounts_complete
+    exec -- /system/bin/odin_early_logger --metadata-marker firmware-mounts-complete
+
+on early-boot
+    exec -- /system/bin/odin_early_logger --metadata-marker early-boot
+
+on boot
+    exec -- /system/bin/odin_early_logger --metadata-marker boot
+
+on property:sys.boot_completed=1
+    exec -- /system/bin/odin_early_logger --metadata-marker boot-completed
