@@ -115,21 +115,23 @@ require(mappings == required_mappings,
         "keylayout must match the required controller buttons and axes")
 
 required_resources = {
-    ("Launcher3/res/values/config.xml", "bool",
+    ("overlay/packages/apps/Launcher3/res/values/config.xml", "bool",
      "config_launcherControllerNavigation"): "true",
-    ("SetupWizard/res/values/config.xml", "bool",
+    ("overlay/packages/apps/SetupWizard/res/values/config.xml", "bool",
      "config_controllerInitialFocus"): "true",
-    ("Settings/res/values/config.xml", "bool",
+    ("overlay/packages/apps/Settings/res/values/config.xml", "bool",
      "config_controllerInitialFocus"): "true",
-    ("Settings/res/values-land/dimens.xml", "dimen",
+    ("overlay/packages/apps/Settings/res/values-land/dimens.xml", "dimen",
      "settingslib_toolbar_layout_height"): "128dp",
-    ("Settings/res/values-land/dimens.xml", "dimen",
+    ("overlay/packages/apps/Settings/res/values-land/dimens.xml", "dimen",
      "settingslib_scrim_visible_height_trigger"): "96dp",
-    ("Settings/res/values-land/dimens.xml", "dimen",
+    ("overlay/packages/apps/Settings/res/values-land/dimens.xml", "dimen",
      "expanded_title_margin_bottom"): "48dp",
+    ("overlay/packages/inputmethods/LatinIME/java/res/values/config.xml", "bool",
+     "config_enable_controller_navigation"): "true",
 }
 for (path, tag, name), expected in required_resources.items():
-    actual = resource_value(f"overlay/packages/apps/{path}", tag, name)
+    actual = resource_value(path, tag, name)
     require(actual == expected, f"{path}: expected {name}={expected}, got {actual}")
 
 print("controller wiring contract: PASS")
