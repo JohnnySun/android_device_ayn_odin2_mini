@@ -9,5 +9,9 @@ system/app/OdinSettings/OdinSettings.apk
 system/app/TouchMapping/TouchMapping.apk
 system/app/GameAssistant/GameAssistant.apk
 
-# Device-specific firmware/HAL blobs will be added after a full partition dump
-# or adb pull inventory is reviewed.
+# Stock Qualcomm device manifest. The stock image stores the Kalama-specific
+# source name; the target build consumes the canonical VINTF destination.
+vendor/etc/vintf/manifest_kalama.xml:vendor/etc/vintf/manifest.xml
+
+# Add further device-specific firmware/HAL blobs only after the corresponding
+# private stock inventory and target consumer are reviewed.

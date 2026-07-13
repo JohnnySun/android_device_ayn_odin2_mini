@@ -1,0 +1,22 @@
+#!/usr/bin/env -S PYTHONPATH=../../../tools/extract-utils python3
+#
+# SPDX-License-Identifier: Apache-2.0
+
+from extract_utils.main import (
+    ExtractUtils,
+    ExtractUtilsModule,
+)
+
+namespace_imports = [
+    'device/ayn/odin2_mini',
+]
+
+module = ExtractUtilsModule(
+    'odin2_mini',
+    'ayn',
+    namespace_imports=namespace_imports,
+)
+
+if __name__ == '__main__':
+    utils = ExtractUtils.device(module)
+    utils.run()
