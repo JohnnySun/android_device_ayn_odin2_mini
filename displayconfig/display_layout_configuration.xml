@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layouts>
+    <layout>
+        <state>0</state>
+        <name>handheld</name>
+        <display enabled="true" defaultDisplay="true">
+            <address>4630946589942819203</address>
+            <position>front</position>
+        </display>
+        <display enabled="false" defaultDisplay="false">
+            <address>4630946667327121796</address>
+        </display>
+    </layout>
+</layouts>

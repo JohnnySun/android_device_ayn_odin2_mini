@@ -19,6 +19,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_ven
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
 PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/displayconfig/display_layout_configuration.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/displayconfig/display_layout_configuration.xml \
     $(DEVICE_PATH)/idc/hyn_ts.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/hyn_ts.idc \
     $(DEVICE_PATH)/vendor_ramdisk/.keep:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/.keep \
     $(DEVICE_PATH)/vendor_ramdisk/first_stage_ramdisk/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
