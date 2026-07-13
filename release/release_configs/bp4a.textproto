@@ -1,0 +1,2 @@
+name: "bp4a"
+aconfig_value_sets: "//device/ayn/odin2_mini:aconfig_value_set-odin2-mini-bp4a"
