@@ -1,0 +1,39 @@
+cc_binary {
+    name: "odin_early_logger",
+    srcs: ["odin_early_logger.c"],
+    compile_multilib: "64",
+    static_executable: true,
+    static_libs: ["libc"],
+    system_shared_libs: [],
+    stl: "none",
+    cflags: ["-Wall", "-Werror"],
+}
+
+cc_binary {
+    name: "odin_power_safety",
+    srcs: ["odin_power_safety.c"],
+    compile_multilib: "64",
+    static_executable: true,
+    static_libs: ["libc"],
+    system_shared_libs: [],
+    stl: "none",
+    cflags: ["-Wall", "-Werror"],
+}
+
+cc_binary {
+    name: "odin_init_timeout",
+    srcs: ["odin_init_timeout.c"],
+    compile_multilib: "64",
+    static_executable: true,
+    static_libs: ["libc"],
+    system_shared_libs: [],
+    stl: "none",
+    cflags: ["-Wall", "-Werror"],
+}
+
+prebuilt_etc {
+    name: "odin_early_trace_rc",
+    src: "odin-early-trace.rc",
+    filename: "odin-early-trace.rc",
+    sub_dir: "init",
+}
