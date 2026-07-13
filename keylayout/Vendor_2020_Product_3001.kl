@@ -1,0 +1,39 @@
+# Copyright (C) 2026 The LineageOS Project
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# AYN Odin2 Gamepad exposed by hardware/ayn rsinputd.
+
+# D-pad
+key 544 DPAD_UP       # BTN_DPAD_UP
+key 545 DPAD_DOWN     # BTN_DPAD_DOWN
+key 546 DPAD_LEFT     # BTN_DPAD_LEFT
+key 547 DPAD_RIGHT    # BTN_DPAD_RIGHT
+
+# Face and shoulder buttons
+key 304 BUTTON_A      # BTN_SOUTH
+key 305 BUTTON_B      # BTN_EAST
+key 307 BUTTON_X      # BTN_NORTH
+key 308 BUTTON_Y      # BTN_WEST
+key 310 BUTTON_L1     # BTN_TL
+key 311 BUTTON_R1     # BTN_TR
+
+# Menu and stick buttons
+key 314 BUTTON_SELECT # BTN_SELECT
+key 315 BUTTON_START  # BTN_START
+key 316 BUTTON_MODE   # BTN_MODE
+key 317 BUTTON_THUMBL # BTN_THUMBL
+key 318 BUTTON_THUMBR # BTN_THUMBR
+key 278 F1            # BTN_BACK
+
+# Left stick
+axis 0x00 X           # ABS_X
+axis 0x01 Y           # ABS_Y
+
+# Right stick
+axis 0x03 Z           # ABS_RX
+axis 0x04 RZ          # ABS_RY
+
+# Analog triggers
+axis 0x02 LTRIGGER    # ABS_Z
+axis 0x05 RTRIGGER    # ABS_RZ

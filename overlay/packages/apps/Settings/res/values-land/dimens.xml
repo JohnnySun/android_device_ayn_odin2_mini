@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <dimen name="settingslib_toolbar_layout_height">128dp</dimen>
+    <dimen name="settingslib_scrim_visible_height_trigger">96dp</dimen>
+    <dimen name="expanded_title_margin_bottom">48dp</dimen>
+</resources>
