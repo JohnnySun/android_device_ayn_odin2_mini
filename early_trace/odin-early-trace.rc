@@ -3,6 +3,7 @@ service odin_early_kmsg /system/bin/odin_early_logger --metadata-kmsg
     user root
     group root log
     disabled
+    oneshot
     seclabel u:r:init:s0
 
 service odin_early_logcat /system/bin/logcat -b all -v threadtime -f /metadata/odin-early-logcat.log
@@ -10,6 +11,7 @@ service odin_early_logcat /system/bin/logcat -b all -v threadtime -f /metadata/o
     user root
     group root log readproc
     disabled
+    oneshot
     seclabel u:r:init:s0
 
 service odin_power_safety /system/bin/odin_power_safety
@@ -76,4 +78,6 @@ on boot
     exec -- /system/bin/odin_early_logger --metadata-marker boot
 
 on property:sys.boot_completed=1
+    stop odin_early_kmsg
+    stop odin_early_logcat
     exec -- /system/bin/odin_early_logger --metadata-marker boot-completed
