@@ -118,6 +118,10 @@ BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := 1704067200
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
 
+# Keep the board image contract aligned with the default bring-up product.
+# Release isolation can opt out explicitly with ODIN2_EARLY_TRACE=false.
+ODIN2_EARLY_TRACE ?= true
+
 # Early-trace images are temporary diagnostics. Keep dm-verity and the signed
 # hash tree, but omit optional FEC so trace growth cannot resize system_b.
 ifeq ($(ODIN2_EARLY_TRACE),true)

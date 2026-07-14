@@ -1,3 +1,6 @@
+# Set the bring-up default before device.mk consumes the profile.
+ODIN2_EARLY_TRACE ?= true
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/ayn/odin2_mini/device.mk)
