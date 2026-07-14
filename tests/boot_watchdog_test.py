@@ -15,14 +15,14 @@ class BootWatchdogTest(unittest.TestCase):
         self.assertIn('name: "odin_boot_watchdog"', blueprint)
         self.assertIn("odin_boot_watchdog", product)
 
-    def test_watchdog_starts_after_metadata_and_disarms_only_on_completed_boot(self):
+    def test_watchdog_starts_at_early_init_and_disarms_only_on_completed_boot(self):
         rc = (ROOT / "early_trace" / "odin-early-trace.rc").read_text()
 
         self.assertIn("service odin_boot_watchdog /system/bin/odin_boot_watchdog", rc)
-        self.assertRegex(
-            rc,
-            r"on post-fs-data[\s\S]*start odin_boot_watchdog",
-        )
+        early_init = rc.split("on early-init", 1)[1].split("\non ", 1)[0]
+        self.assertIn("start odin_boot_watchdog", early_init)
+        post_fs_data = rc.split("on post-fs-data", 1)[1].split("\non ", 1)[0]
+        self.assertNotIn("start odin_boot_watchdog", post_fs_data)
         self.assertRegex(
             rc,
             r"on property:sys\.boot_completed=1[\s\S]*stop odin_boot_watchdog",

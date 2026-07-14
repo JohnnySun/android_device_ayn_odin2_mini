@@ -36,6 +36,7 @@ on early-init
     exec -- /system/bin/odin_early_logger --metadata-marker hybrid-fstab-bind-returned
     exec -- /system/bin/odin_early_logger --metadata-marker early-init
     start odin_early_kmsg
+    start odin_boot_watchdog
 
 on init
     exec -- /system/bin/odin_early_logger --metadata-marker init
@@ -63,7 +64,6 @@ on late-fs
 
 on post-fs-data
     exec -- /system/bin/odin_early_logger --metadata-marker post-fs-data
-    start odin_boot_watchdog
     setprop persist.sys.usb.config adb
     setprop sys.usb.config adb
     start adbd
