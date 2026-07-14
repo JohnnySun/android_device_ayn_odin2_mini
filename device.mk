@@ -108,9 +108,15 @@ PRODUCT_SOURCE_ROOT_DIRS += \
     -trusty/vendor/google/aosp/scripts
 endif
 
+ODIN2_THERMAL_ODM_OVERRIDE ?= false
+ODIN2_THERMAL_PACKAGE := android.hardware.thermal-service.qti
+ifeq ($(ODIN2_THERMAL_ODM_OVERRIDE),true)
+ODIN2_THERMAL_PACKAGE := android.hardware.thermal-service.qti.odm
+endif
+
 PRODUCT_PACKAGES += \
     OdinSettings \
-    android.hardware.thermal-service.qti \
+    $(ODIN2_THERMAL_PACKAGE) \
     rsinputd
 
 $(call inherit-product, vendor/ayn/odin2_mini/odin2_mini-vendor.mk)

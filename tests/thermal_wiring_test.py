@@ -35,8 +35,27 @@ packages = make_values(device_mk, "PRODUCT_PACKAGES")
 copies = make_values(device_mk, "PRODUCT_COPY_FILES")
 
 require(
-    packages.count("android.hardware.thermal-service.qti") == 1,
-    "device product must include the QTI AIDL thermal service exactly once",
+    packages.count("$(ODIN2_THERMAL_PACKAGE)") == 1,
+    "device product must include the selected thermal package exactly once",
+)
+require(
+    "ODIN2_THERMAL_ODM_OVERRIDE ?= false" in device_mk,
+    "ODM thermal override must remain opt-in",
+)
+require(
+    "ODIN2_THERMAL_PACKAGE := android.hardware.thermal-service.qti\n"
+    in device_mk,
+    "default product profile must retain the vendor thermal provider",
+)
+require(
+    re.search(
+        r"ifeq \(\$\(ODIN2_THERMAL_ODM_OVERRIDE\),true\)\n"
+        r"ODIN2_THERMAL_PACKAGE := "
+        r"android\.hardware\.thermal-service\.qti\.odm\n"
+        r"endif",
+        device_mk,
+    ) is not None,
+    "opt-in profile must select the ODM thermal override module",
 )
 require(
     "thermal-engine-v2" not in packages,
