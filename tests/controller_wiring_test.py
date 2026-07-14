@@ -134,4 +134,21 @@ for (path, tag, name), expected in required_resources.items():
     actual = resource_value(path, tag, name)
     require(actual == expected, f"{path}: expected {name}={expected}, got {actual}")
 
+taskbar_flag_path = (
+    DEVICE_ROOT
+    / "release/aconfig/bp4a/com.android.wm.shell"
+    / "enable_taskbar_navbar_unification_flag_values.textproto"
+)
+require(taskbar_flag_path.is_file(),
+        "Odin2 Mini must override taskbar/navbar unification for three-button navigation")
+taskbar_flag = taskbar_flag_path.read_text()
+require('package: "com.android.wm.shell"' in taskbar_flag,
+        "taskbar/navbar flag override must target com.android.wm.shell")
+require('name: "enable_taskbar_navbar_unification"' in taskbar_flag,
+        "taskbar/navbar flag override must target the exact aconfig flag")
+require("state: DISABLED" in taskbar_flag,
+        "taskbar/navbar unification must remain disabled on Odin2 Mini")
+require("permission: READ_ONLY" in taskbar_flag,
+        "taskbar/navbar override must be frozen in the release config")
+
 print("controller wiring contract: PASS")
