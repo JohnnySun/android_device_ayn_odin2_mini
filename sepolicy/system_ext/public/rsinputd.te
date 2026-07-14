@@ -1,0 +1,2 @@
+# rsinputd crosses into vendor policy only to access its dedicated UART.
+type rsinputd, domain;

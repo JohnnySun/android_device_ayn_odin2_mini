@@ -84,8 +84,8 @@ require("device.id.product = 0x3001;" in rsinputd_source,
 
 rc_lines = [line.rstrip() for line in rsinputd_rc.splitlines()]
 require(rc_lines.count(
-    "on late-init && property:ro.product.device=odin2_mini") == 1,
-    "rsinputd must have one exact odin2_mini late-init gate")
+    "on boot && property:ro.product.device=odin2_mini") == 1,
+    "rsinputd must have one exact odin2_mini boot gate")
 require(rc_lines.count("    start rsinputd") == 1,
         "rsinputd must have exactly one gated start")
 service = rc_lines[rc_lines.index("service rsinputd /system/bin/rsinputd") + 1:]

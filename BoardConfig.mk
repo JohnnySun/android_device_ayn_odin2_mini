@@ -145,6 +145,13 @@ TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
 
+# rsinputd is a /system daemon that accesses one Odin-specific vendor device.
+# Export only its domain type; keep implementation and device policy private to
+# their owning partitions.
+SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/system_ext/public
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/system_ext/private
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+
 BOARD_SUPER_PARTITION_SIZE := 5679575040
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := \
