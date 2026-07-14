@@ -4,4 +4,4 @@ type rsinputd_exec, system_file_type, exec_type, file_type;
 init_daemon_domain(rsinputd)
 
 get_prop(rsinputd, build_prop)
-write_logd(rsinputd)
+unix_socket_send(rsinputd, logdw, logd)

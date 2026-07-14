@@ -102,8 +102,12 @@ require("init_daemon_domain(rsinputd)" in private_policy,
         "init must transition rsinputd into its dedicated domain")
 require("get_prop(rsinputd, build_prop)" in private_policy,
         "rsinputd must read ro.product.device in its own domain")
-require("write_logd(rsinputd)" in private_policy,
-        "rsinputd must retain native logging in its own domain")
+require("write_logd(rsinputd)" not in private_policy,
+        "rsinputd logging must not grant pmsg_device access")
+require("unix_socket_send(rsinputd, logdw, logd)" in private_policy,
+        "rsinputd logging must use only the logd datagram socket")
+require("pmsg_device" not in private_policy,
+        "rsinputd must not receive direct pmsg_device access")
 require(
     context_for(system_file_contexts, "/system/bin/rsinputd")
     == "u:object_r:rsinputd_exec:s0",
