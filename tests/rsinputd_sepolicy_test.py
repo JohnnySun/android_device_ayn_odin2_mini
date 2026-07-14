@@ -56,6 +56,12 @@ public_policy = (
 private_policy = (
     DEVICE_ROOT / "sepolicy/system_ext/private/rsinputd.te"
 ).read_text()
+private_device_policy = (
+    DEVICE_ROOT / "sepolicy/system_ext/private/device.te"
+).read_text()
+private_genfs_contexts = (
+    DEVICE_ROOT / "sepolicy/system_ext/private/genfs_contexts"
+).read_text()
 system_file_contexts = (
     DEVICE_ROOT / "sepolicy/system_ext/private/file_contexts"
 ).read_text()
@@ -67,9 +73,6 @@ vendor_rsinputd_policy = (
 ).read_text()
 vendor_file_contexts = (
     DEVICE_ROOT / "sepolicy/vendor/file_contexts"
-).read_text()
-vendor_genfs_contexts = (
-    DEVICE_ROOT / "sepolicy/vendor/genfs_contexts"
 ).read_text()
 
 device_path = "$(DEVICE_PATH)/sepolicy"
@@ -139,19 +142,23 @@ require(
     ) == {"open", "write", "ioctl"},
     "/dev/uinput access must match its write-only open and ioctl use",
 )
-require("type rsinputd_mcu_sysfs, fs_type, sysfs_type;" in vendor_device_policy,
+require("type rsinputd_mcu_sysfs, fs_type, sysfs_type;" in private_device_policy,
         "the controller MCU power node must have a dedicated sysfs type")
 require(
     "genfscon sysfs /devices/platform/rsgpio/driver_ctl "
-    "u:object_r:rsinputd_mcu_sysfs:s0" in vendor_genfs_contexts,
+    "u:object_r:rsinputd_mcu_sysfs:s0" in private_genfs_contexts,
     "the exact controller MCU power node must receive its dedicated label",
 )
 require(
     allow_permissions(
-        vendor_rsinputd_policy, "rsinputd", "rsinputd_mcu_sysfs", "file"
+        private_policy, "rsinputd", "rsinputd_mcu_sysfs", "file"
     ) == {"open", "write"},
     "controller MCU power access must remain write-only and path-specific",
 )
+require("rsinputd_mcu_sysfs" not in vendor_device_policy,
+        "the MCU type must ship in system_ext, not the preserved stock vendor")
+require("rsinputd_mcu_sysfs" not in vendor_rsinputd_policy,
+        "the MCU allow rule must ship in system_ext, not the preserved stock vendor")
 
 all_policy = "\n".join(
     path.read_text()
