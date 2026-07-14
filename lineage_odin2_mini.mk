@@ -19,6 +19,7 @@ endif
 
 ifeq ($(ODIN2_EARLY_TRACE),true)
 PRODUCT_PACKAGES += \
+    odin_boot_watchdog \
     odin_early_logger \
     odin_power_safety \
     odin_early_trace_rc

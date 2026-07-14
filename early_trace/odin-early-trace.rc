@@ -22,6 +22,14 @@ service odin_power_safety /system/bin/odin_power_safety
     oneshot
     seclabel u:r:init:s0
 
+service odin_boot_watchdog /system/bin/odin_boot_watchdog
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:init:s0
+
 on early-init
     exec -- /system/bin/odin_early_logger --metadata-marker hybrid-fstab-bind-start
     exec -- /system/bin/mount -o bind /system/etc/fstab.odin2_hybrid.qcom /vendor/etc/fstab.qcom
@@ -55,6 +63,7 @@ on late-fs
 
 on post-fs-data
     exec -- /system/bin/odin_early_logger --metadata-marker post-fs-data
+    start odin_boot_watchdog
     setprop persist.sys.usb.config adb
     setprop sys.usb.config adb
     start adbd
@@ -78,6 +87,7 @@ on boot
     exec -- /system/bin/odin_early_logger --metadata-marker boot
 
 on property:sys.boot_completed=1
+    stop odin_boot_watchdog
     stop odin_early_kmsg
     stop odin_early_logcat
     exec -- /system/bin/odin_early_logger --metadata-marker boot-completed
