@@ -8,12 +8,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class BootWatchdogTest(unittest.TestCase):
-    def test_watchdog_is_static_and_packaged(self):
+    def test_watchdog_is_packaged(self):
         blueprint = (ROOT / "early_trace" / "Android.bp").read_text()
         product = (ROOT / "lineage_odin2_mini.mk").read_text()
 
         self.assertIn('name: "odin_boot_watchdog"', blueprint)
-        self.assertIn('static_executable: true', blueprint)
         self.assertIn("odin_boot_watchdog", product)
 
     def test_watchdog_starts_after_metadata_and_disarms_only_on_completed_boot(self):

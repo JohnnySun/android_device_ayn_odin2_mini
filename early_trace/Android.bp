@@ -35,9 +35,6 @@ cc_binary {
     name: "odin_boot_watchdog",
     srcs: ["odin_boot_watchdog.c"],
     compile_multilib: "64",
-    static_executable: true,
-    static_libs: ["libc"],
-    system_shared_libs: [],
     stl: "none",
     cflags: ["-Wall", "-Werror"],
 }
