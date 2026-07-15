@@ -55,7 +55,6 @@ int main(int argc, char** argv) {
     sync();
     syscall(SYS_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2,
             LINUX_REBOOT_CMD_RESTART2, "bootloader");
-    syscall(SYS_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2,
-            LINUX_REBOOT_CMD_RESTART, NULL);
+    record("watchdog recovery failed: restart2 returned\n");
     return 125;
 }

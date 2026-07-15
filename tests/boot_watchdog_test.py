@@ -34,7 +34,8 @@ class BootWatchdogTest(unittest.TestCase):
         self.assertIn("#define TIMEOUT_SECONDS 180", source)
         self.assertIn("CLOCK_BOOTTIME", source)
         self.assertIn('LINUX_REBOOT_CMD_RESTART2, "bootloader"', source)
-        self.assertIn("LINUX_REBOOT_CMD_RESTART", source)
+        self.assertNotIn("LINUX_REBOOT_CMD_RESTART, NULL", source)
+        self.assertIn("watchdog recovery failed: restart2 returned", source)
         self.assertIn("/metadata/odin-boot-watchdog.log", source)
 
 
