@@ -1,0 +1,9 @@
+type odinsettings_app, domain, coredomain;
+
+app_domain(odinsettings_app)
+
+# Preserve the standard privileged-app Android API surface after assigning a
+# package-specific domain, then add only the private fan service.
+allow odinsettings_app app_api_service:service_manager find;
+allow odinsettings_app system_api_service:service_manager find;
+allow odinsettings_app odin_fan_service:service_manager find;

@@ -1,0 +1,16 @@
+type odinfand, domain, coredomain;
+type odinfand_exec, system_file_type, exec_type, file_type;
+
+init_daemon_domain(odinfand)
+binder_use(odinfand)
+add_service(odinfand, odin_fan_service)
+
+get_prop(odinfand, build_prop)
+get_prop(odinfand, build_vendor_prop)
+unix_socket_send(odinfand, logdw, logd)
+
+# The service reads every write back before reporting success.
+allow odinfand odin_fan_control_sysfs:file { open read write };
+allow odinfand odin_fan_status_sysfs:file { open read };
+
+binder_call(odinsettings_app, odinfand)

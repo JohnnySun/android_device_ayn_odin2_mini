@@ -111,6 +111,7 @@ endif
 PRODUCT_PACKAGES += \
     OdinSettings \
     android.hardware.thermal-service.qti \
+    odinfand \
     rsinputd
 
 $(call inherit-product, vendor/ayn/odin2_mini/odin2_mini-vendor.mk)

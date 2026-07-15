@@ -1,1 +1,2 @@
+/system/bin/odinfand     u:object_r:odinfand_exec:s0
 /system/bin/rsinputd    u:object_r:rsinputd_exec:s0

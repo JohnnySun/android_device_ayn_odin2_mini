@@ -65,7 +65,7 @@ require("hardware/ayn" in make_values(device_mk, "PRODUCT_SOONG_NAMESPACES"),
         "device product must expose the hardware/ayn Soong namespace")
 packages = make_values(device_mk, "PRODUCT_PACKAGES")
 require("rsinputd" in packages, "device product must include rsinputd")
-require("odinfand" not in packages, "device product must not include odinfand")
+require(packages.count("odinfand") == 1, "device product must include odinfand once")
 copies = make_values(device_mk, "PRODUCT_COPY_FILES")
 require(
     "$(DEVICE_PATH)/keylayout/Vendor_2020_Product_3001.kl:"

@@ -1,1 +1,5 @@
+genfscon sysfs /class/gpio5_pwm2/state u:object_r:odin_fan_control_sysfs:s0
+genfscon sysfs /class/gpio5_pwm2/duty u:object_r:odin_fan_control_sysfs:s0
+genfscon sysfs /class/gpio5_pwm2/period u:object_r:odin_fan_status_sysfs:s0
+genfscon sysfs /class/gpio5_pwm2/speed u:object_r:odin_fan_status_sysfs:s0
 genfscon sysfs /devices/platform/rsgpio/driver_ctl u:object_r:rsinputd_mcu_sysfs:s0
