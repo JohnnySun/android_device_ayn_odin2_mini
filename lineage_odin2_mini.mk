@@ -2,14 +2,14 @@
 ODIN2_EARLY_TRACE ?= true
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/ayn/odin2_mini/device.mk)
 
 ifeq ($(ODIN2_EARLY_TRACE),true)
 WITH_ADB_INSECURE := true
 endif
 
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
 
 # M1 needs a recoverable first boot inside the stock-A-preserving super tail.
 # These optional or stock Odin UI packages return during M2 hardware bring-up.
