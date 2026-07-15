@@ -1,0 +1,20 @@
+# Copyright (C) 2026 The LineageOS Project
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# The Odin2 Mini has a dedicated Back button. Keep the east face button as a
+# gamepad B event instead of inheriting Generic.kcm's BUTTON_B -> BACK fallback.
+
+type FULL
+
+key BUTTON_A {
+    base:                               fallback DPAD_CENTER
+}
+
+key BUTTON_X {
+    base:                               fallback DEL
+}
+
+key BUTTON_Y {
+    base:                               fallback SPACE
+}

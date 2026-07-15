@@ -73,6 +73,12 @@ require(
     in copies,
     "device product must install the exact rsinputd keylayout",
 )
+require(
+    "$(DEVICE_PATH)/keychars/Vendor_2020_Product_3001.kcm:"
+    "$(TARGET_COPY_OUT_SYSTEM)/usr/keychars/Vendor_2020_Product_3001.kcm"
+    in copies,
+    "device product must install the exact rsinputd key character map",
+)
 
 require('name: "rsinputd"' in hardware_bp, "hardware repo must define rsinputd")
 require('init_rc: ["rsinputd.rc"]' in hardware_bp,
@@ -113,6 +119,12 @@ required_mappings = {
 }
 require(mappings == required_mappings,
         "keylayout must match the required controller buttons and axes")
+
+keychars = (DEVICE_ROOT / "keychars/Vendor_2020_Product_3001.kcm").read_text()
+require("key BUTTON_A" in keychars and "fallback DPAD_CENTER" in keychars,
+        "key character map must preserve A-button navigation fallback")
+require("key BUTTON_B" not in keychars and "fallback BACK" not in keychars,
+        "dedicated Back means BUTTON_B must not fall back to Android Back")
 
 required_resources = {
     ("overlay/packages/apps/Launcher3/res/values/config.xml", "bool",
