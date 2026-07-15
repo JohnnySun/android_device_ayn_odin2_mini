@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="config_notificationsBatteryLowARGB">0xFF190000</integer>
-    <integer name="config_notificationsBatteryMediumARGB">0xFF191900</integer>
-    <integer name="config_notificationsBatteryFullARGB">0xFF001900</integer>
+    <integer name="config_notificationsBatteryLowARGB">0xFF080000</integer>
+    <integer name="config_notificationsBatteryMediumARGB">0xFF080800</integer>
+    <integer name="config_notificationsBatteryFullARGB">0xFF000800</integer>
 
     <bool name="config_showNavigationBar">true</bool>
     <bool name="config_navBarCanMove">false</bool>

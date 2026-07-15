@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <!-- Framework battery colors already cap the physical LED near 10%. -->
+    <!-- Framework battery colors already cap the physical LED near 3%. -->
     <integer name="def_battery_brightness_level">255</integer>
     <integer name="def_battery_brightness_level_zen">255</integer>
 </resources>

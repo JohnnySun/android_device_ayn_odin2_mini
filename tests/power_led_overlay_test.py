@@ -10,9 +10,9 @@ from pathlib import Path
 DEVICE_ROOT = Path(__file__).resolve().parents[1]
 OVERLAY_CONFIG = Path("overlay/frameworks/base/core/res/res/values/config.xml")
 EXPECTED_COLORS = {
-    "config_notificationsBatteryLowARGB": 0xFF190000,
-    "config_notificationsBatteryMediumARGB": 0xFF191900,
-    "config_notificationsBatteryFullARGB": 0xFF001900,
+    "config_notificationsBatteryLowARGB": 0xFF080000,
+    "config_notificationsBatteryMediumARGB": 0xFF080800,
+    "config_notificationsBatteryFullARGB": 0xFF000800,
 }
 
 
@@ -52,7 +52,7 @@ class PowerLedOverlayTest(unittest.TestCase):
             color = int(item.text, 0)
             channels = ((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF)
             self.assertNotIn(0xFF, channels, item.get("name"))
-            self.assertLessEqual(max(channels), 0x19, item.get("name"))
+            self.assertLessEqual(max(channels), 0x08, item.get("name"))
 
     def test_device_mk_mounts_the_overlay_root(self):
         device_mk = (DEVICE_ROOT / "device.mk").read_text()
