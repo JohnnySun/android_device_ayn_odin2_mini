@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <!-- RGB battery LED plus software-scaled battery brightness. -->
+    <integer name="config_deviceLightCapabilities">66</integer>
+</resources>
