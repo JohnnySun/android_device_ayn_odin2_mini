@@ -142,12 +142,19 @@ require(
     ) == {"open", "write", "ioctl"},
     "/dev/uinput access must match its write-only open and ioctl use",
 )
-require("rsinputd_mcu_sysfs" not in private_device_policy,
-        "display-owned MCU power must not expose an rsinputd sysfs type")
-require("/devices/platform/rsgpio/driver_ctl" not in private_genfs_contexts,
-        "display-owned MCU power must not add an rsinputd sysfs label")
-require("rsinputd_mcu_sysfs" not in private_policy,
-        "rsinputd must not receive MCU power write access")
+require("type rsinputd_mcu_sysfs, fs_type, sysfs_type;" in private_device_policy,
+        "cold-boot MCU power must use a dedicated sysfs type")
+require(
+    "genfscon sysfs /devices/platform/rsgpio/driver_ctl "
+    "u:object_r:rsinputd_mcu_sysfs:s0" in private_genfs_contexts,
+    "the exact cold-boot MCU power node must receive its dedicated label",
+)
+require(
+    allow_permissions(
+        private_policy, "rsinputd", "rsinputd_mcu_sysfs", "file"
+    ) == {"open", "write"},
+    "cold-boot MCU power access must remain write-only and path-specific",
+)
 require("rsinputd_mcu_sysfs" not in vendor_device_policy,
         "the preserved stock vendor must not declare an rsinputd MCU type")
 require("rsinputd_mcu_sysfs" not in vendor_rsinputd_policy,
@@ -164,8 +171,8 @@ require(not re.search(r"\ballow\s+rsinputd\s+device:", all_policy),
 require("rw_file_perms" not in vendor_rsinputd_policy,
         "rsinputd device grants must enumerate exact permissions")
 require(
-    len(re.findall(r"\ballow\s+rsinputd\b[^;]*;", all_policy)) == 2,
-    "rsinputd must have only the explicit UART and uinput rules",
+    len(re.findall(r"\ballow\s+rsinputd\b[^;]*;", all_policy)) == 3,
+    "rsinputd must have only the UART, uinput, and cold-boot MCU rules",
 )
 
 print("rsinputd sepolicy contract: PASS")
