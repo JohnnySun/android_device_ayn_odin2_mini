@@ -13,8 +13,8 @@ key 547 DPAD_RIGHT    # BTN_DPAD_RIGHT
 # Face and shoulder buttons
 key 304 BUTTON_A      # BTN_SOUTH
 key 305 BUTTON_B      # BTN_EAST
-key 307 BUTTON_X      # BTN_NORTH
-key 308 BUTTON_Y      # BTN_WEST
+key 307 BUTTON_Y      # BTN_NORTH
+key 308 BUTTON_X      # BTN_WEST
 key 310 BUTTON_L1     # BTN_TL
 key 311 BUTTON_R1     # BTN_TR
 
