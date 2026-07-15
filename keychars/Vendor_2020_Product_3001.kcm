@@ -11,6 +11,10 @@ key BUTTON_A {
     base:                               fallback DPAD_CENTER
 }
 
+key BUTTON_B {
+    base:                               none
+}
+
 key BUTTON_X {
     base:                               fallback DEL
 }

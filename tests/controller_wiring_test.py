@@ -123,8 +123,11 @@ require(mappings == required_mappings,
 keychars = (DEVICE_ROOT / "keychars/Vendor_2020_Product_3001.kcm").read_text()
 require("key BUTTON_A" in keychars and "fallback DPAD_CENTER" in keychars,
         "key character map must preserve A-button navigation fallback")
-require("key BUTTON_B" not in keychars and "fallback BACK" not in keychars,
-        "dedicated Back means BUTTON_B must not fall back to Android Back")
+button_b = re.search(r"key BUTTON_B\s*\{(?P<body>.*?)\}", keychars, re.S)
+require(button_b is not None and re.search(r"\bbase\s*:\s*none\b", button_b.group("body")),
+        "dedicated Back requires an explicit BUTTON_B base:none override")
+require("fallback BACK" not in button_b.group("body"),
+        "BUTTON_B must not inherit or declare the Generic KCM Back fallback")
 
 required_resources = {
     ("overlay/packages/apps/Launcher3/res/values/config.xml", "bool",
