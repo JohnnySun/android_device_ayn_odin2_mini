@@ -32,11 +32,20 @@ def make_values(text, variable):
 
 device_mk = (DEVICE_ROOT / "device.mk").read_text()
 packages = make_values(device_mk, "PRODUCT_PACKAGES")
+debug_packages = make_values(device_mk, "PRODUCT_PACKAGES_DEBUG")
 copies = make_values(device_mk, "PRODUCT_COPY_FILES")
 
 require(
     packages.count("android.hardware.thermal-service.qti") == 1,
     "device product must include the QTI AIDL thermal service exactly once",
+)
+require(
+    debug_packages.count("thermal_selftest") == 1,
+    "userdebug product must include the read-only thermal self-test exactly once",
+)
+require(
+    "thermal_selftest" not in packages,
+    "thermal self-test must not enter the release package set",
 )
 require(
     "thermal-engine-v2" not in packages,

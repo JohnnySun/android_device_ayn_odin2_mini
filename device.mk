@@ -110,6 +110,9 @@ PRODUCT_SOURCE_ROOT_DIRS += \
     -trusty/vendor/google/aosp/scripts
 endif
 
+PRODUCT_PACKAGES_DEBUG += \
+    thermal_selftest
+
 PRODUCT_PACKAGES += \
     OdinSettings \
     android.hardware.thermal-service.qti \
