@@ -5,5 +5,3 @@ init_daemon_domain(rsinputd)
 
 get_prop(rsinputd, build_prop)
 unix_socket_send(rsinputd, logdw, logd)
-
-allow rsinputd rsinputd_mcu_sysfs:file { open write };
