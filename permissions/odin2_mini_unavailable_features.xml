@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Features incorrectly declared by the retained stock vendor image. -->
+<permissions>
+    <unavailable-feature name="android.hardware.camera" />
+    <unavailable-feature name="android.hardware.camera.any" />
+    <unavailable-feature name="android.hardware.camera.autofocus" />
+    <unavailable-feature name="android.hardware.camera.capability.manual_post_processing" />
+    <unavailable-feature name="android.hardware.camera.capability.manual_sensor" />
+    <unavailable-feature name="android.hardware.camera.capability.raw" />
+    <unavailable-feature name="android.hardware.camera.concurrent" />
+    <unavailable-feature name="android.hardware.camera.flash" />
+    <unavailable-feature name="android.hardware.camera.front" />
+    <unavailable-feature name="android.hardware.camera.level.full" />
+
+    <unavailable-feature name="android.hardware.location.gps" />
+
+    <unavailable-feature name="android.hardware.nfc" />
+    <unavailable-feature name="android.hardware.nfc.any" />
+    <unavailable-feature name="android.hardware.nfc.ese" />
+    <unavailable-feature name="android.hardware.nfc.hce" />
+    <unavailable-feature name="android.hardware.nfc.hcef" />
+    <unavailable-feature name="android.hardware.nfc.uicc" />
+    <unavailable-feature name="android.hardware.se.omapi.ese" />
+    <unavailable-feature name="android.hardware.se.omapi.uicc" />
+    <unavailable-feature name="com.android.se" />
+    <unavailable-feature name="com.nxp.mifare" />
+
+    <unavailable-feature name="android.hardware.sensor.ambient_temperature" />
+    <unavailable-feature name="android.hardware.sensor.barometer" />
+    <unavailable-feature name="android.hardware.sensor.dynamic.head_tracker" />
+    <unavailable-feature name="android.hardware.sensor.light" />
+    <unavailable-feature name="android.hardware.sensor.proximity" />
+    <unavailable-feature name="android.hardware.sensor.relative_humidity" />
+
+    <unavailable-feature name="android.hardware.telephony" />
+    <unavailable-feature name="android.hardware.telephony.calling" />
+    <unavailable-feature name="android.hardware.telephony.cdma" />
+    <unavailable-feature name="android.hardware.telephony.data" />
+    <unavailable-feature name="android.hardware.telephony.gsm" />
+    <unavailable-feature name="android.hardware.telephony.ims" />
+    <unavailable-feature name="android.hardware.telephony.mbms" />
+    <unavailable-feature name="android.hardware.telephony.messaging" />
+    <unavailable-feature name="android.hardware.telephony.radio.access" />
+    <unavailable-feature name="android.hardware.telephony.subscription" />
+</permissions>
