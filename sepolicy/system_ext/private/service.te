@@ -1,1 +1,2 @@
 type odin_fan_service, protected_service, service_manager_type;
+type odin_performance_service, protected_service, service_manager_type;

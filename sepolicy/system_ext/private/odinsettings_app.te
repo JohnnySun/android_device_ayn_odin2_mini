@@ -7,3 +7,4 @@ app_domain(odinsettings_app)
 allow odinsettings_app app_api_service:service_manager find;
 allow odinsettings_app system_api_service:service_manager find;
 allow odinsettings_app odin_fan_service:service_manager find;
+allow odinsettings_app odin_performance_service:service_manager find;

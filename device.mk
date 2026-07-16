@@ -22,6 +22,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/displayconfig/display_layout_configuration.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/displayconfig/display_layout_configuration.xml \
     $(DEVICE_PATH)/idc/hyn_ts.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/hyn_ts.idc \
+    $(DEVICE_PATH)/init/odinperformanced-device.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/odinperformanced-device.rc \
     $(DEVICE_PATH)/keychars/Vendor_2020_Product_3001.kcm:$(TARGET_COPY_OUT_SYSTEM)/usr/keychars/Vendor_2020_Product_3001.kcm \
     $(DEVICE_PATH)/keylayout/Vendor_2020_Product_3001.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/Vendor_2020_Product_3001.kl \
     $(DEVICE_PATH)/permissions/odin2_mini_unavailable_features.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/odin2_mini_unavailable_features.xml \
@@ -117,6 +118,7 @@ PRODUCT_PACKAGES += \
     OdinSettings \
     android.hardware.thermal-service.qti \
     odinfand \
+    odinperformanced \
     rsinputd
 
 $(call inherit-product, vendor/ayn/odin2_mini/odin2_mini-vendor.mk)
