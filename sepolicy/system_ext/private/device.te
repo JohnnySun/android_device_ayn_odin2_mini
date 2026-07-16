@@ -1,3 +1,2 @@
 type odin_fan_control_sysfs, fs_type, sysfs_type;
 type odin_fan_status_sysfs, fs_type, sysfs_type;
-type odin_performance_sysfs, fs_type, sysfs_type;
