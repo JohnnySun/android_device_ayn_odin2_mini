@@ -116,6 +116,7 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     OdinSettings \
     android.hardware.thermal-service.qti \
+    com.ayn.controller-java \
     odinfand \
     rsinputd
 
