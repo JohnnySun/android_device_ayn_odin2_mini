@@ -65,15 +65,14 @@ private_genfs_contexts = (
 system_file_contexts = (
     DEVICE_ROOT / "sepolicy/system_ext/private/file_contexts"
 ).read_text()
-vendor_device_policy = (
-    DEVICE_ROOT / "sepolicy/vendor/device.te"
-).read_text()
-vendor_rsinputd_policy = (
-    DEVICE_ROOT / "sepolicy/vendor/rsinputd.te"
-).read_text()
-vendor_file_contexts = (
-    DEVICE_ROOT / "sepolicy/vendor/file_contexts"
-).read_text()
+vendor_policy_root = DEVICE_ROOT / "sepolicy/vendor"
+vendor_type_enforcement = "\n".join(
+    path.read_text() for path in vendor_policy_root.rglob("*.te")
+)
+vendor_file_contexts = "\n".join(
+    path.read_text()
+    for path in vendor_policy_root.rglob("*file_contexts")
+)
 
 device_path = "$(DEVICE_PATH)/sepolicy"
 require(
@@ -96,7 +95,7 @@ require(
 )
 
 require("type rsinputd, domain;" in public_policy,
-        "rsinputd must export its domain type to vendor policy")
+        "rsinputd must expose its domain type to system_ext policy")
 require("typeattribute rsinputd coredomain;" in private_policy,
         "the /system daemon must remain a core domain")
 require(
@@ -120,16 +119,16 @@ require(
     "/system/bin/rsinputd must receive the dedicated exec label",
 )
 
-require("type rsinputd_uart_device, dev_type;" in vendor_device_policy,
-        "the RSInput UART must have a dedicated device type")
+require("type rsinputd_uart_device, dev_type;" in private_device_policy,
+        "system_ext must define the dedicated RSInput UART device type")
 require(
-    context_for(vendor_file_contexts, "/dev/ttyHS1")
+    context_for(system_file_contexts, "/dev/ttyHS1")
     == "u:object_r:rsinputd_uart_device:s0",
-    "/dev/ttyHS1 must receive the dedicated RSInput UART label",
+    "system_ext file_contexts must label /dev/ttyHS1 as the RSInput UART",
 )
 require(
     allow_permissions(
-        vendor_rsinputd_policy,
+        private_policy,
         "rsinputd",
         "rsinputd_uart_device",
         "chr_file",
@@ -138,20 +137,22 @@ require(
 )
 require(
     allow_permissions(
-        vendor_rsinputd_policy, "rsinputd", "uhid_device", "chr_file"
+        private_policy, "rsinputd", "uhid_device", "chr_file"
     ) == {"open", "write", "ioctl"},
     "/dev/uinput access must match its write-only open and ioctl use",
 )
+require("rsinputd_uart_device" not in vendor_type_enforcement,
+        "controller UART policy must not depend on undeployed vendor fragments")
+require("/dev/ttyHS1" not in vendor_file_contexts,
+        "controller UART label must not depend on undeployed vendor file_contexts")
 require("rsinputd_mcu_sysfs" not in private_device_policy,
         "display-owned MCU power must not expose an rsinputd sysfs type")
 require("/devices/platform/rsgpio/driver_ctl" not in private_genfs_contexts,
         "display-owned MCU power must not add an rsinputd sysfs label")
 require("rsinputd_mcu_sysfs" not in private_policy,
         "rsinputd must not receive MCU power write access")
-require("rsinputd_mcu_sysfs" not in vendor_device_policy,
+require("rsinputd_mcu_sysfs" not in vendor_type_enforcement,
         "the preserved stock vendor must not declare an rsinputd MCU type")
-require("rsinputd_mcu_sysfs" not in vendor_rsinputd_policy,
-        "the preserved stock vendor must not grant rsinputd MCU access")
 
 all_policy = "\n".join(
     path.read_text()
@@ -161,7 +162,7 @@ require(not re.search(r"\bpermissive\s+rsinputd\s*;", all_policy),
         "rsinputd must not be made permissive")
 require(not re.search(r"\ballow\s+rsinputd\s+device:", all_policy),
         "rsinputd must never receive generic device access")
-require("rw_file_perms" not in vendor_rsinputd_policy,
+require("rw_file_perms" not in private_policy,
         "rsinputd device grants must enumerate exact permissions")
 require(
     len(re.findall(r"\ballow\s+rsinputd\b[^;]*;", all_policy)) == 2,

@@ -9,3 +9,6 @@ get_prop(rsinputd, build_prop)
 get_prop(rsinputd, odin_controller_config_prop)
 set_prop(rsinputd, odin_controller_config_prop)
 unix_socket_send(rsinputd, logdw, logd)
+
+allow rsinputd rsinputd_uart_device:chr_file { getattr open read write ioctl };
+allow rsinputd uhid_device:chr_file { open write ioctl };

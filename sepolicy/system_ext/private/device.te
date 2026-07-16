@@ -1,2 +1,3 @@
 type odin_fan_control_sysfs, fs_type, sysfs_type;
 type odin_fan_status_sysfs, fs_type, sysfs_type;
+type rsinputd_uart_device, dev_type;

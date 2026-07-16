@@ -1,2 +1,2 @@
-# rsinputd crosses into vendor policy only to access its dedicated UART.
+# rsinputd is a system daemon whose device access is defined by system_ext.
 type rsinputd, domain;
