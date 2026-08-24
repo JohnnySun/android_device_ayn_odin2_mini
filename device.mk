@@ -118,6 +118,7 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal-service.qti \
     com.ayn.controller-java \
     odinfand \
+    odinlightsd \
     rsinputd
 
 $(call inherit-product, vendor/ayn/odin2_mini/odin2_mini-vendor.mk)

@@ -2,3 +2,6 @@ genfscon sysfs /class/gpio5_pwm2/state u:object_r:odin_fan_control_sysfs:s0
 genfscon sysfs /class/gpio5_pwm2/duty u:object_r:odin_fan_control_sysfs:s0
 genfscon sysfs /class/gpio5_pwm2/period u:object_r:odin_fan_status_sysfs:s0
 genfscon sysfs /class/gpio5_pwm2/speed u:object_r:odin_fan_status_sysfs:s0
+genfscon sysfs /class/leds/red/brightness u:object_r:odin_indicator_led_sysfs:s0
+genfscon sysfs /class/leds/green/brightness u:object_r:odin_indicator_led_sysfs:s0
+genfscon sysfs /class/leds/blue/brightness u:object_r:odin_indicator_led_sysfs:s0

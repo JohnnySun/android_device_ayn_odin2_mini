@@ -1,0 +1,16 @@
+type odinlightsd, domain, coredomain;
+type odinlightsd_exec, system_file_type, exec_type, file_type;
+
+init_daemon_domain(odinlightsd)
+
+get_prop(odinlightsd, build_prop)
+unix_socket_send(odinlightsd, logdw, logd)
+
+# The clamp reads each channel before deciding, and writes only what changed.
+allow odinlightsd odin_indicator_led_sysfs:file { open read write };
+
+# Relabelling these nodes takes them out of vendor_sysfs_graphics, so the stock
+# lights HAL has to be granted the access it used to hold, or the LED stops
+# working entirely under Enforcing. hal_light_default is a platform type, so
+# system_ext policy is allowed to name it.
+allow hal_light_default odin_indicator_led_sysfs:file { open read write };
