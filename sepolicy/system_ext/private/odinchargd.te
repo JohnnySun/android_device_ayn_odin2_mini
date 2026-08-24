@@ -1,0 +1,16 @@
+type odinchargd, domain, coredomain;
+type odinchargd_exec, system_file_type, exec_type, file_type;
+
+init_daemon_domain(odinchargd)
+
+get_prop(odinchargd, build_prop)
+unix_socket_send(odinchargd, logdw, logd)
+
+# The restriction and its current, both relabelled out of the generic sysfs
+# type so this is the only domain that can hold charging off.
+allow odinchargd odin_charge_control_sysfs:file { open read write };
+
+# Battery capacity keeps its vendor label. A coredomain cannot be granted a
+# vendor-private type from here, so this read is the one part of the daemon
+# that still depends on Permissive and has to be resolved alongside the
+# Qualcomm vendor policy work before whole-device Enforcing.
