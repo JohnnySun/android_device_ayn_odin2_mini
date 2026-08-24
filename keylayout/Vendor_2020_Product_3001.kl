@@ -21,10 +21,10 @@ key 311 BUTTON_R1     # BTN_TR
 # Menu and stick buttons
 key 314 BUTTON_SELECT # BTN_SELECT
 key 315 BUTTON_START  # BTN_START
-key 316 BUTTON_MODE   # BTN_MODE
+key 316 HOME          # BTN_MODE
 key 317 BUTTON_THUMBL # BTN_THUMBL
 key 318 BUTTON_THUMBR # BTN_THUMBR
-key 278 F1            # BTN_BACK
+key 278 BACK          # BTN_BACK
 
 # Left stick
 axis 0x00 X           # ABS_X
