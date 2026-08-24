@@ -106,9 +106,9 @@ for raw_line in keylayout.splitlines():
         mappings.add((fields[0], int(fields[1], 0), fields[2]))
 required_mappings = {
     *(('key', code, name) for code, name in {
-        278: 'F1', 304: 'BUTTON_A', 305: 'BUTTON_B', 307: 'BUTTON_Y',
+        278: 'BACK', 304: 'BUTTON_A', 305: 'BUTTON_B', 307: 'BUTTON_Y',
         308: 'BUTTON_X', 310: 'BUTTON_L1', 311: 'BUTTON_R1',
-        314: 'BUTTON_SELECT', 315: 'BUTTON_START', 316: 'BUTTON_MODE',
+        314: 'BUTTON_SELECT', 315: 'BUTTON_START', 316: 'HOME',
         317: 'BUTTON_THUMBL', 318: 'BUTTON_THUMBR', 544: 'DPAD_UP',
         545: 'DPAD_DOWN', 546: 'DPAD_LEFT', 547: 'DPAD_RIGHT',
     }.items()),
