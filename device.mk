@@ -117,6 +117,7 @@ PRODUCT_PACKAGES += \
     OdinSettings \
     android.hardware.thermal-service.qti \
     com.ayn.controller-java \
+    GameAssistantNative \
     odinchargd \
     odinfand \
     odinlightsd \
