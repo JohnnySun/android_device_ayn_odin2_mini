@@ -14,7 +14,7 @@ EXPECTED_COLORS = {
     "config_notificationsBatteryMediumARGB": 0xFF080800,
     "config_notificationsBatteryFullARGB": 0xFF000800,
 }
-EXPECTED_BRIGHTNESS_CAP = 8
+EXPECTED_BRIGHTNESS_CAP = 1
 
 
 def make_values(text, variable):

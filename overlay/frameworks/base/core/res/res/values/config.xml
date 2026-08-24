@@ -3,7 +3,7 @@
     <integer name="config_notificationsBatteryLowARGB">0xFF080000</integer>
     <integer name="config_notificationsBatteryMediumARGB">0xFF080800</integer>
     <integer name="config_notificationsBatteryFullARGB">0xFF000800</integer>
-    <integer name="config_indicatorLightBrightnessCap">8</integer>
+    <integer name="config_indicatorLightBrightnessCap">1</integer>
 
     <bool name="config_showNavigationBar">true</bool>
     <bool name="config_navBarCanMove">false</bool>
