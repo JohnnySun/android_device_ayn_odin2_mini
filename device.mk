@@ -13,7 +13,12 @@ DEVICE_PACKAGE_OVERLAYS += \
 # and rotation then depends on how the device was moved into a pose rather than
 # on the pose itself. The official AYN Odin 2 tree, the same landscape handheld
 # arrangement, sets both.
-PRODUCT_PRODUCT_PROPERTIES += \
+# System properties rather than product ones, because every candidate here is a
+# system-only transaction: a product property is built into product/etc/build.prop
+# and would never reach the device. The deployed product still carries an older
+# copy of the orientation line from the whole-super flash; it holds the same
+# value, so the duplicate is inert.
+PRODUCT_SYSTEM_PROPERTIES += \
     debug.sf.ignore_hwc_physical_display_orientation=true \
     ro.surface_flinger.primary_display_orientation=ORIENTATION_90
 
