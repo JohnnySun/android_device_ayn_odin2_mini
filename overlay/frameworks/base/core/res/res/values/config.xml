@@ -5,14 +5,6 @@
     <integer name="config_notificationsBatteryFullARGB">0xFF000800</integer>
     <integer name="config_indicatorLightBrightnessCap">1</integer>
 
-    <!-- The panel is mounted portrait and SurfaceFlinger turns it a quarter
-         clockwise, so the device orientation sensor reports a quarter turn
-         ahead of the rotation the framework wants. Measured: held in the normal
-         landscape grip the sensor proposes ROTATION_90 for seventy seconds
-         while ROTATION_0 is what the owner confirmed is upright. Three quarter
-         turns clockwise is a quarter turn back. -->
-    <integer name="config_deviceOrientationSensorRotationOffset">3</integer>
-
     <bool name="config_showNavigationBar">true</bool>
     <bool name="config_navBarCanMove">false</bool>
 </resources>
