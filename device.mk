@@ -8,7 +8,13 @@ PRODUCT_SOONG_NAMESPACES += \
 DEVICE_PACKAGE_OVERLAYS += \
     $(DEVICE_PATH)/overlay
 
+# These two go together. Rotating the panel in SurfaceFlinger without telling it
+# to ignore the orientation the display HAL reports leaves the two disagreeing,
+# and rotation then depends on how the device was moved into a pose rather than
+# on the pose itself. The official AYN Odin 2 tree, the same landscape handheld
+# arrangement, sets both.
 PRODUCT_PRODUCT_PROPERTIES += \
+    debug.sf.ignore_hwc_physical_display_orientation=true \
     ro.surface_flinger.primary_display_orientation=ORIENTATION_90
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
