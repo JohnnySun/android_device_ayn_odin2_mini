@@ -1,5 +1,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
+# NOT IN ANY BUILD. Nothing adds odin2_m1_minimal_profile to PRODUCT_PACKAGES,
+# so /system/etc/odin2_m1_minimal_profile has never existed on the device and
+# the LOCAL_OVERRIDES_MODULES list below has never suppressed anything: Jelly,
+# Gallery2, Twelve and Aperture are all installed despite being named here, and
+# TouchMapping shipped for months while listed here too. Read this file as a
+# statement of intent, never as a description of what the image contains.
+# Wiring it up removes a dozen applications and is a product decision.
+
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
