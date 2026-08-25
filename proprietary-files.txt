@@ -5,8 +5,15 @@
 
 # Stock Odin apps used for behavior study. Do not ship these once the
 # replacement stack covers the feature.
+#
+# TouchMapping is deliberately absent. Its native library talks to /dev/rscom
+# and /dev/rsinput, which this port does not have: the kernel registers only
+# rstouch and rsgpio, and the controller UART belongs to rsinputd. The app
+# therefore fails device_cmd_ctl forever, burning about 30 percent of a core
+# and writing over two thousand log lines a second. It is a persistent system
+# app, so disabling and killing it on the device does not stop it. Touch
+# mapping is an unported feature, not a working one.
 system/app/OdinSettings/OdinSettings.apk
-system/app/TouchMapping/TouchMapping.apk
 system/app/GameAssistant/GameAssistant.apk
 
 # Stock Qualcomm device manifest. The stock image stores the Kalama-specific
