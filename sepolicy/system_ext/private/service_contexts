@@ -1,2 +1,3 @@
 com.ayn.fan.IOdinFan/default    u:object_r:odin_fan_service:s0
 com.ayn.controller.IOdinController/default    u:object_r:odin_controller_service:s0
+com.ayn.charge.IOdinCharge/default u:object_r:odin_charge_service:s0
