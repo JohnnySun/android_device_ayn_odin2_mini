@@ -1,3 +1,4 @@
+# Inert until a transaction can write system_ext; see odinlightsd.te.
 type odinchargd, domain, coredomain;
 type odinchargd_exec, system_file_type, exec_type, file_type;
 
