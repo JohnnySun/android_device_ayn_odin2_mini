@@ -122,6 +122,7 @@ PRODUCT_PACKAGES += \
     odinchargd \
     odinfand \
     odinlightsd \
+    odinperformanced \
     rsinputd
 
 $(call inherit-product, vendor/ayn/odin2_mini/odin2_mini-vendor.mk)
