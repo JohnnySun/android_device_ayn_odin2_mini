@@ -136,4 +136,21 @@ PRODUCT_PACKAGES += \
     odinperformanced \
     rsinputd
 
+# The board is declared A/B and the vendor boot control HAL 1.2 is registered
+# and running, but none of the A/B userspace was ever built into the image, so
+# slot state cannot be read or changed from the device at all.
+#
+# bootctl is a CLI over the HAL that is already up. It adds no runtime
+# behaviour and makes slot state legible, which is the first thing any A/B
+# work needs.
+#
+# update_engine and update_verifier are deliberately not here yet. Both change
+# boot behaviour - update_verifier verifies the slot at boot and marks it
+# successful - and slot A has been unbootable since its single attempt, so
+# there is no rollback if that goes wrong. They go in with the OTA work, once
+# the AB_OTA_PARTITIONS fork in
+# docs/design/super-resize-and-real-ab-2026-08-26.md is decided.
+PRODUCT_PACKAGES += \
+    bootctl
+
 $(call inherit-product, vendor/ayn/odin2_mini/odin2_mini-vendor.mk)
