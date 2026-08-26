@@ -6,7 +6,7 @@ service odin_early_kmsg /system/bin/odin_early_logger --metadata-kmsg
     oneshot
     seclabel u:r:init:s0
 
-service odin_early_logcat /system/bin/logcat -b all -v threadtime -f /metadata/odin-early-logcat.log
+service odin_early_logcat /system/bin/logcat -b all -v threadtime -f /metadata/odin-early-logcat.log -r 512 -n 1
     class core
     user root
     group root log readproc
@@ -31,6 +31,8 @@ service odin_boot_watchdog /system/bin/odin_boot_watchdog
     seclabel u:r:init:s0
 
 on early-init
+    exec -- /system/bin/rm -f /metadata/odin-early-trace.log.1
+    exec -- /system/bin/mv /metadata/odin-early-trace.log /metadata/odin-early-trace.log.1
     exec -- /system/bin/odin_early_logger --metadata-marker hybrid-fstab-bind-start
     exec -- /system/bin/mount -o bind /system/etc/fstab.odin2_hybrid.qcom /vendor/etc/fstab.qcom
     exec -- /system/bin/odin_early_logger --metadata-marker hybrid-fstab-bind-returned
@@ -44,7 +46,7 @@ on init
 on late-init
     exec -- /system/bin/odin_early_logger --metadata-marker late-init
     start odin_power_safety
-    exec -- /system/bin/rm -f /metadata/odin-early-logcat.log
+    exec -- /system/bin/rm -f /metadata/odin-early-logcat.log /metadata/odin-early-logcat.log.1
     start odin_early_logcat
 
 on early-fs
