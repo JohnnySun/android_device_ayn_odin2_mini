@@ -1,0 +1,30 @@
+type odinperformanced, domain, coredomain;
+type odinperformanced_exec, system_file_type, exec_type, file_type;
+
+init_daemon_domain(odinperformanced)
+
+get_prop(odinperformanced, build_prop)
+unix_socket_send(odinperformanced, logdw, logd)
+
+# The screen state the hold loop skips on, which the stock daemon also read.
+get_prop(odinperformanced, debug_prop)
+
+# The CPU frequency floors. These keep the generic core label rather than being
+# relabelled, because the QTI performance stack owns the same nodes and moving
+# them out from under it would be a larger change than this daemon justifies.
+allow odinperformanced sysfs_devices_system_cpu:file { open read write };
+allow odinperformanced sysfs_devices_system_cpu:dir search;
+
+# The chosen mode, so it survives a reboot.
+allow odinperformanced system_data_file:file { create open read write getattr unlink };
+allow odinperformanced system_data_file:dir { search write add_name remove_name };
+
+binder_use(odinperformanced)
+add_service(odinperformanced, odin_performance_service)
+binder_call(odinsettings_app, odinperformanced)
+
+# The GPU floor keeps its vendor label, vendor_sysfs_kgsl, and a coredomain
+# cannot be granted a vendor-private type from here. That write is the one part
+# of this daemon that still depends on Permissive, exactly like the battery
+# capacity read in odinchargd.te, and both belong with the Qualcomm vendor
+# policy work before whole-device Enforcing.

@@ -1,15 +1,14 @@
-# Inert until a transaction can write system_ext.
+# Live since 2026-08-26.
 #
 # The executable carries whatever label file_contexts gives it, and that label
-# is baked into the system image as an xattr. Labelling it odinlightsd_exec
-# only works if this policy ships in the same transaction, and system_ext
-# currently holds GApps that cannot be rebuilt from the surviving source tree.
-# init refuses to start a service whose executable carries a type the loaded
-# policy does not define, and Permissive does not change that: it governs
-# whether denials block, not whether a type exists.
+# is baked into the image as an xattr, so labelling it only works when this
+# policy ships in the same transaction. init refuses to start a service whose
+# executable carries a type the loaded policy does not define, and Permissive
+# does not change that: it governs whether denials block, not whether a type
+# exists. That is why the label was dropped when only system could be written.
 #
-# So the file_contexts entry is deliberately absent and the binary ships as
-# system_file. This domain is kept for the coherent build that can deliver it.
+# The transaction now writes system_ext, and system_ext is rebuilt with GApps
+# rather than preserved, so the policy and the label ship together.
 type odinlightsd, domain, coredomain;
 type odinlightsd_exec, system_file_type, exec_type, file_type;
 
