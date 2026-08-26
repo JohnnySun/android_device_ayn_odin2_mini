@@ -18,6 +18,8 @@ allow odinperformanced sysfs_devices_system_cpu:dir search;
 binder_use(odinperformanced)
 add_service(odinperformanced, odin_performance_service)
 binder_call(odinsettings_app, odinperformanced)
+# The game overlay sets the mode per game, so it is a second client.
+binder_call(gameassistant_app, odinperformanced)
 
 # Two writes are deliberately not granted here, and both still depend on
 # Permissive:

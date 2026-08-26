@@ -1,0 +1,11 @@
+type gameassistant_app, domain, coredomain;
+
+app_domain(gameassistant_app)
+
+# The standard app API surface, then only the service the overlay actually
+# calls. The settings app's history is the reason this is explicit: a service
+# added later without its find works under Permissive and fails the moment the
+# device is not.
+allow gameassistant_app app_api_service:service_manager find;
+allow gameassistant_app system_api_service:service_manager find;
+allow gameassistant_app odin_performance_service:service_manager find;

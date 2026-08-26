@@ -1,1 +1,7 @@
 user=_app isPrivApp=true seinfo=platform name=com.odin2.odinsettings domain=odinsettings_app type=app_data_file levelFrom=user
+# GameAssistant is platform-signed but installs to /system/app, not priv-app,
+# so isPrivApp is deliberately unset rather than copied from the settings row.
+# Without a domain of its own it lands in the generic platform app domain and
+# cannot be granted find on our private services, which is how the settings app
+# came to resolve them on Permissive alone before v72.
+user=_app seinfo=platform name=com.odin2.gameassistant domain=gameassistant_app type=app_data_file levelFrom=user
