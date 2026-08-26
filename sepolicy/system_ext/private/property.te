@@ -1,1 +1,6 @@
 system_internal_prop(odin_controller_config_prop)
+
+# Bumped by rsinputd once per overlay chord, read by GameAssistant. Internal
+# rather than public: only those two have any business with it, and a property
+# anything could write would be a way to open a menu over a running game.
+system_internal_prop(odin_overlay_request_prop)

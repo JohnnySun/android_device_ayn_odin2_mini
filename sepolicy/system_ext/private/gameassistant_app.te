@@ -9,3 +9,7 @@ app_domain(gameassistant_app)
 allow gameassistant_app app_api_service:service_manager find;
 allow gameassistant_app system_api_service:service_manager find;
 allow gameassistant_app odin_performance_service:service_manager find;
+
+# Watching for the overlay chord rsinputd reports. Read only: an app that could
+# write this could open a menu over someone else's game.
+get_prop(gameassistant_app, odin_overlay_request_prop)
