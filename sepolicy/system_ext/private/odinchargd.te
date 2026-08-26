@@ -18,3 +18,8 @@ binder_call(odinsettings_app, odinchargd)
 # vendor-private type from here, so this read is the one part of the daemon
 # that still depends on Permissive and has to be resolved alongside the
 # Qualcomm vendor policy work before whole-device Enforcing.
+
+# Persisted mode, so a reboot keeps what the user chose. init creates the
+# directory; this domain owns the file inside it.
+allow odinchargd odin_data_file:dir rw_dir_perms;
+allow odinchargd odin_data_file:file create_file_perms;

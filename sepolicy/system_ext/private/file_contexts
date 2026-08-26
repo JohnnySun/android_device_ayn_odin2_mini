@@ -8,3 +8,6 @@
 /system/bin/odinchargd  u:object_r:odinchargd_exec:s0
 /system/bin/odinlightsd u:object_r:odinlightsd_exec:s0
 /system/bin/odinperformanced u:object_r:odinperformanced_exec:s0
+
+# Persisted mode for the charge and performance daemons. See device.te.
+/data/misc/odin(/.*)?  u:object_r:odin_data_file:s0

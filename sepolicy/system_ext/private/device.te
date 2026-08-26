@@ -2,3 +2,10 @@ type odin_fan_control_sysfs, fs_type, sysfs_type;
 type odin_fan_status_sysfs, fs_type, sysfs_type;
 type odin_charge_control_sysfs, fs_type, sysfs_type;
 type rsinputd_uart_device, dev_type;
+
+# Persisted daemon state. The mode both daemons remember across reboots used to
+# live under /data/system, where every file carries system_data_file and AOSP
+# neverallows a domain writing it. The rule did not compile, which is how the
+# gap was found. Giving the state a type of its own is the fix; the neverallow
+# then does not apply, because the file is no longer system_data_file.
+type odin_data_file, file_type, data_file_type, core_data_file_type;

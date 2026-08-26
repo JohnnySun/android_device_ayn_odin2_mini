@@ -33,3 +33,8 @@ binder_call(odinsettings_app, odinperformanced)
 # moving both state files somewhere the daemons can own, with a type of their
 # own, which is a change to where persisted state lives rather than a policy
 # line, and belongs with the Enforcing work rather than ahead of it.
+
+# Persisted mode, so a reboot keeps what the user chose. init creates the
+# directory; this domain owns the file inside it.
+allow odinperformanced odin_data_file:dir rw_dir_perms;
+allow odinperformanced odin_data_file:file create_file_perms;
