@@ -5,6 +5,13 @@
     <integer name="config_notificationsBatteryFullARGB">0xFF000800</integer>
     <integer name="config_indicatorLightBrightnessCap">1</integer>
 
+    <!-- Gesture navigation by default. This handheld has physical Back and
+         Home buttons, so a three button bar spends screen on controls the
+         device already has. Overriding an existing value, never adding one:
+         adding a resource here shifts every later id and breaks everything
+         outside the partitions this flash writes. -->
+    <integer name="config_navBarInteractionMode">2</integer>
+
     <bool name="config_showNavigationBar">true</bool>
     <bool name="config_navBarCanMove">false</bool>
 </resources>
