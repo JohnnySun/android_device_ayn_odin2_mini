@@ -3,7 +3,13 @@
     <integer name="config_notificationsBatteryLowARGB">0xFF080000</integer>
     <integer name="config_notificationsBatteryMediumARGB">0xFF080800</integer>
     <integer name="config_notificationsBatteryFullARGB">0xFF000800</integer>
-    <integer name="config_indicatorLightBrightnessCap">1</integer>
+
+    <!-- config_indicatorLightBrightnessCap was here and is gone. It is not a
+         framework resource: nothing declares it and nothing reads it, so it
+         did nothing at all - while being an *added* name in a static overlay,
+         which is the one thing the comment below warns against. Every other
+         entry in this file overrides a resource the framework already has.
+         The LED clamp lives in odinlightsd, not here. -->
 
     <!-- Gesture navigation by default. This handheld has physical Back and
          Home buttons, so a three button bar spends screen on controls the

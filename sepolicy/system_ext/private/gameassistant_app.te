@@ -10,6 +10,12 @@ allow gameassistant_app app_api_service:service_manager find;
 allow gameassistant_app system_api_service:service_manager find;
 allow gameassistant_app odin_performance_service:service_manager find;
 
-# Watching for the overlay chord rsinputd reports. Read only: an app that could
-# write this could open a menu over someone else's game.
+# The overlay chord arrives over rsinputd's binder service rather than by
+# watching a property: SystemProperties change callbacks were tried and never
+# delivered to the app, with the process awake and unfrozen.
+allow gameassistant_app odin_controller_service:service_manager find;
+binder_call(gameassistant_app, rsinputd)
+
+# The daemon still records the chord on this property as its own log, so
+# "did rsinputd see it" can be answered without involving the app. Read only.
 get_prop(gameassistant_app, odin_overlay_request_prop)

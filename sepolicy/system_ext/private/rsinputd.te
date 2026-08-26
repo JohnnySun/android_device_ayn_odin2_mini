@@ -15,3 +15,7 @@ allow rsinputd uhid_device:chr_file { open write ioctl };
 
 # The overlay chord. rsinputd is the only writer; the app only reads.
 set_prop(rsinputd, odin_overlay_request_prop)
+
+# Calling back into a registered listener. oneway, but the reply path still
+# needs the reverse grant.
+binder_call(rsinputd, gameassistant_app)
