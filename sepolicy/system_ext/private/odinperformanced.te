@@ -15,16 +15,21 @@ get_prop(odinperformanced, debug_prop)
 allow odinperformanced sysfs_devices_system_cpu:file { open read write };
 allow odinperformanced sysfs_devices_system_cpu:dir search;
 
-# The chosen mode, so it survives a reboot.
-allow odinperformanced system_data_file:file { create open read write getattr unlink };
-allow odinperformanced system_data_file:dir { search write add_name remove_name };
-
 binder_use(odinperformanced)
 add_service(odinperformanced, odin_performance_service)
 binder_call(odinsettings_app, odinperformanced)
 
+# Two writes are deliberately not granted here, and both still depend on
+# Permissive:
+#
 # The GPU floor keeps its vendor label, vendor_sysfs_kgsl, and a coredomain
-# cannot be granted a vendor-private type from here. That write is the one part
-# of this daemon that still depends on Permissive, exactly like the battery
+# cannot be granted a vendor-private type from here. Same shape as the battery
 # capacity read in odinchargd.te, and both belong with the Qualcomm vendor
 # policy work before whole-device Enforcing.
+#
+# The stored mode lives at /data/system/odin-performance-mode, and AOSP
+# neverallows any domain writing system_data_file, so granting it here does not
+# compile. odinchargd has the same gap for the same reason. Closing it means
+# moving both state files somewhere the daemons can own, with a type of their
+# own, which is a change to where persisted state lives rather than a policy
+# line, and belongs with the Enforcing work rather than ahead of it.
