@@ -27,3 +27,10 @@ unix_socket_send(odinlightsd, logdw, logd)
 # The daemon works today because the device runs Permissive. Granting it
 # properly belongs with the Qualcomm vendor policy work, in a policy unit where
 # both hal_light_default and the vendor sysfs type are visible.
+
+# Traversing /sys/class/leds to reach the LED nodes. sysfs_leds is a public
+# plat type, so unlike the brightness files themselves this one is ours to
+# grant, and it was 326 of this daemon's denials. It does not make the daemon
+# work under Enforcing on its own: the brightness files below it keep
+# vendor_sysfs_graphics, which a coredomain cannot be granted from here.
+allow odinlightsd sysfs_leds:dir search;

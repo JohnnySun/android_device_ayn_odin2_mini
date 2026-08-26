@@ -14,10 +14,13 @@ binder_use(odinchargd)
 add_service(odinchargd, odin_charge_service)
 binder_call(odinsettings_app, odinchargd)
 
-# Battery capacity keeps its vendor label. A coredomain cannot be granted a
-# vendor-private type from here, so this read is the one part of the daemon
-# that still depends on Permissive and has to be resolved alongside the
-# Qualcomm vendor policy work before whole-device Enforcing.
+# Battery capacity is read from the health HAL, not from
+# /sys/class/power_supply/battery/capacity. That node carries
+# vendor_sysfs_battery_supply, and a coredomain cannot be granted a
+# vendor-private type from system_ext policy, so the direct read only ever
+# worked because the device was Permissive - 460 denials in one boot. Crossing
+# at the HAL is what Treble is for, and this grant is one AOSP macro.
+hal_client_domain(odinchargd, hal_health)
 
 # Persisted mode, so a reboot keeps what the user chose. init creates the
 # directory; this domain owns the file inside it.
