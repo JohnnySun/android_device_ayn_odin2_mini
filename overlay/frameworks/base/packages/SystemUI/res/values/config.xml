@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The charge control tile belongs in the shade out of the box. Without
-         this it exists only for someone who adds it by hand, and Android 16
-         seeds its large-tile set from whatever is in this list at first boot,
-         so a tile missing here also renders icon-only with no visible label.
+    <!-- Which tiles are in the shade out of the box. Without an entry here a
+         tile exists only for someone who goes looking and adds it by hand.
          Both lists are set because the classic and the new quick settings UI
-         read different ones. -->
+         read different ones.
+
+         These lists control which tiles are *present*. They do not control
+         whether a tile renders large. An earlier version of this comment said
+         they seeded the large-tile set at first boot; that is false.
+         SystemUI's DefaultLargeTilesRepositoryImpl returns a hardcoded
+         {internet, bt, dnd, cast} unless the qs_split_internet_tile_rw flag is
+         on, and it is off here, so there is no overridable resource for size.
+         The believed-but-false version of this cost two wrong diagnoses on
+         2026-08-27. -->
     <string name="quick_settings_tiles_default" translatable="false">
-        internet,bt,flashlight,dnd,alarm,airplane,controls,wallet,rotation,battery,cast,screenrecord,mictoggle,cameratoggle,custom(com.odin2.odinsettings/.tiles.ChargeBypassTileService),custom(com.android.permissioncontroller/.permission.service.v33.SafetyCenterQsTileService)
+        internet,bt,flashlight,dnd,alarm,airplane,controls,wallet,rotation,battery,cast,screenrecord,mictoggle,cameratoggle,custom(com.odin2.odinsettings/.tiles.ChargeBypassTileService),custom(com.odin2.gameassistant/.service.FloatingWindowTileService),custom(com.android.permissioncontroller/.permission.service.v33.SafetyCenterQsTileService)
     </string>
 
     <string name="quick_settings_tiles_new_default" translatable="false">
-        internet,bt,dnd,cast,flashlight,airplane,rotation,wallet,alarm,controls,screenrecord,battery,custom(com.odin2.odinsettings/.tiles.ChargeBypassTileService)
+        internet,bt,dnd,cast,flashlight,airplane,rotation,wallet,alarm,controls,screenrecord,battery,custom(com.odin2.odinsettings/.tiles.ChargeBypassTileService),custom(com.odin2.gameassistant/.service.FloatingWindowTileService)
     </string>
 </resources>
