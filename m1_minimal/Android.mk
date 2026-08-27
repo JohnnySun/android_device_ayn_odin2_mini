@@ -1,12 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 
-# NOT IN ANY BUILD. Nothing adds odin2_m1_minimal_profile to PRODUCT_PACKAGES,
-# so /system/etc/odin2_m1_minimal_profile has never existed on the device and
-# the LOCAL_OVERRIDES_MODULES list below has never suppressed anything: Jelly,
-# Gallery2, Twelve and Aperture are all installed despite being named here, and
-# TouchMapping shipped for months while listed here too. Read this file as a
-# statement of intent, never as a description of what the image contains.
-# Wiring it up removes a dozen applications and is a product decision.
+# In the community build lane only. lineage_odin2_mini.mk adds this module
+# behind ODIN2_COMMUNITY_M1_MINIMAL_PROFILE, which tools/lineage-community-erofs-build.sh
+# exports and nothing else does - so a build driven straight from
+# `m systemimage systemextimage`, which is how every candidate from v62 onward
+# was made, does not contain it and none of the overrides below apply.
+#
+# That is why the device shows Jelly, Gallery2, Twelve and Aperture despite
+# their being named here, and why TouchMapping shipped for months the same way.
+# An earlier version of this comment said "NOT IN ANY BUILD. Nothing adds
+# odin2_m1_minimal_profile to PRODUCT_PACKAGES", which is false and was read as
+# meaning the list was inert everywhere.
+#
+# So: this list is a description of the community lane and a statement of
+# intent everywhere else. Making it apply to every build removes a dozen
+# applications and is a product decision, not a cleanup.
 
 LOCAL_PATH := $(call my-dir)
 
